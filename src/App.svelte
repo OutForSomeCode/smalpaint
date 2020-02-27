@@ -1,5 +1,4 @@
 <script>
-
     let m = {x: 0, y: 0};
     let scz = {x: 0, y: 0};
 
@@ -7,7 +6,6 @@
         m.x = event.clientX;
         m.y = event.clientY;
     }
-
 
     function addShape(event) {
         m.x = event.clientX;
