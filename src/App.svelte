@@ -1,5 +1,4 @@
 <script>
-    import {onMount} from 'svelte';
 
     let m = {x: 0, y: 0};
     let scz = {x: 0, y: 0};
@@ -9,10 +8,6 @@
         m.y = event.clientY;
     }
 
-    onMount(async () => {
-        scz.x = document.getElementById("screen").offsetWidth;
-        scz.y = document.getElementById("screen").offsetHeight;
-    });
 
     function addShape(event) {
         m.x = event.clientX;
@@ -21,7 +16,12 @@
 </script>
 
 <style>
-    div {
+    svg {
+        background-color: #eee;
+        width: 100%;
+        height: 100%;
+    }
+    #screen {
         width: 100%;
         height: 100%;
     }
@@ -32,7 +32,7 @@
 </style>
 
 <div id="screen" on:mousemove={handleMousemove} on:click={addShape}>
-    <svg viewBox='0 0 {scz.x} {scz.y}'>
+    <svg>
         <rect class="second" x="{m.x}" y="{m.y}" width="100" height="100"/>
     </svg>
 </div>
