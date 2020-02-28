@@ -1,4 +1,5 @@
 <script>
+    import {Circle} from "./shapes/Circle.ts"
     let m = {x: 0, y: 0};
     let pos = {x: 0, y: 0};
 
