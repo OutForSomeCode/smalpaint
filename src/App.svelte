@@ -1,5 +1,6 @@
 <script>
     import {Circle} from "./shapes/Circle.ts"
+
     let m = {x: 0, y: 0};
     let pos = {x: 0, y: 0};
 
@@ -32,7 +33,6 @@
 
 <div id="screen" on:mousemove={handleMousemove} on:click={addShape}>
     <svg>
-        <rect class="second" x="{m.x}" y="{m.y}" width="100" height="100"/>
-        <circle r=""></circle>
+        <rect class="second" x="{m.x}" y="{m.y}" width="10" height="10"/>
     </svg>
 </div>

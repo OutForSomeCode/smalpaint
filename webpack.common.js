@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const path = require('path');
 
@@ -16,7 +17,7 @@ module.exports = {
         mainFields: ['svelte', 'browser', 'module', 'main']
     },
     output: {
-        path: __dirname + '/public'
+        path: __dirname + '/build'
     },
     module: {
         rules: [
@@ -27,6 +28,9 @@ module.exports = {
         ]
     },
     plugins: [
+        new CopyPlugin([
+            { from: 'public', to: '.' },
+        ]),
         new webpack.ProgressPlugin(),
         new HtmlWebpackPlugin({
             filename: 'index.html',
@@ -34,7 +38,7 @@ module.exports = {
             inject: true
         }),
         new MiniCssExtractPlugin({
-            filename: '[name].css'
+            filename: 'css/[name].css'
         })
     ],
 };
