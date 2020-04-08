@@ -1,8 +1,10 @@
 interface IShapes {
-    x:number;
-    y:number;
-    sizeX:number;
-    sizeY:number;
+    type: string;
+    posX: number;
+    posY: number;
+    style: string[];
 
-    draw(): string;
+    get(): any[];
+
+    set(x, y, w, h, style: string[]);
 }

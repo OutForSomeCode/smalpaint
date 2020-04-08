@@ -1,19 +1,21 @@
 <script lang="ts">
     import {Circle} from "./shapes/Circle.ts"
+    import {Square} from "./shapes/Square.ts"
     import {Rectangle} from "./shapes/Rectangle.ts"
 
-    let m = {x: 0, y: 0};
-    let pos = {x: 0, y: 0};
+    let shape = "circle";
+    let DrawShapes = [];
 
-    let DrawShapes = [new Circle(-100, -100, 5)];
-
-    function handleMousemove(event) {
-        m.x = event.clientX;
-        m.y = event.clientY;
+    function updateShape(value) {
+        this.shape = value;
     }
 
     function addShape(event) {
-        DrawShapes.push(new Circle(event.clientX, event.clientY, 50));
+        if (shape === "circle") {
+            DrawShapes.push(new Circle(event.clientX, event.clientY, 50, [`stroke: black;`, `fill: rgb(204,204,204);`]));
+        } else {
+            DrawShapes.push(new Square(event.clientX, event.clientY, 100, [`stroke: black;`, `fill: rgb(204,204,204);`]));
+        }
         DrawShapes[0].x--;
     }
 
@@ -31,17 +33,22 @@
         height: 100%;
     }
 
-    .second {
-        stroke: rgb(180, 0, 0);
-    }
 </style>
 
-<div id="screen" on:mousemove={handleMousemove} on:click={addShape}>
+<div class="controls">
+    <input type="radio" bind:group={shape} value={"circle"} />
+    <input type="radio" bind:group={shape} value={"square"} />
+    {shape}
+</div>
+
+<div id="screen" on:click={addShape}>
     <svg>
         {#each DrawShapes as s}
-            <g>
-                {@html s.draw()}
-            </g>
+            {#if s.type === "circle"}
+                <circle cx="{s.posX}" cy="{s.posY}" r="{s.radius}" style="{s.style[0]} {s.style[1]}"/>
+            {:else}
+                <rect x="{s.posX}" y="{s.posY}" width="{s.size}" height="{s.size}" style="{s.style[0]} {s.style[1]}"/>
+            {/if}}
         {/each}
     </svg>
 </div>
